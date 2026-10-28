@@ -3,7 +3,7 @@ import { Link, Navigate, Outlet, useLocation, useNavigate, useParams } from 'rea
 import { LOCALES, detectLocale, isLocale } from '../i18n/config';
 import { I18nProvider, useI18n } from '../i18n/I18n';
 
-const REPO = 'https://github.com/RCCSilva/nerdifyus';
+const REPO = 'https://github.com/RCCSilva/notes';
 
 function SiteFooter() {
   const { t } = useI18n();
@@ -53,7 +53,7 @@ export default function LangLayout() {
   return (
     <I18nProvider locale={lang}>
       <header className="site-header">
-        <Link to={`/${lang}`} className="brand">nerdify<span>us</span></Link>
+        <Link to={`/${lang}`} className="brand">notes</Link>
         <LanguageSwitcher />
       </header>
       <main className="site-main">

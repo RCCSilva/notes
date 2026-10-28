@@ -13,7 +13,7 @@ body:
     attributes:
       label: Link do slide / Slide link
       description: Copie o endereço da página (termina em ?s=N). / Copy the page address (it ends in ?s=N).
-      placeholder: http://rccsilva.com/nerdifyus/#/pt-BR/nfl/basics?s=8
+      placeholder: https://notes.rccsilva.com/#/pt-BR/nfl/basics?s=8
     validations:
       required: true
   - type: dropdown

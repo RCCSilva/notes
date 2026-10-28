@@ -93,7 +93,6 @@ button:focus-visible, a:focus-visible, [role='button']:focus-visible {
   color: var(--text);
   text-decoration: none;
 }
-.brand span { color: var(--accent); }
 
 .lang {
   display: flex;
