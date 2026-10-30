@@ -1,0 +1,133 @@
+/* Styles shared by the MLB lessons. */
+:root {
+  --mlb-grass: #3b8a4a;
+  --mlb-foul: #2c6a38;
+  --mlb-dirt: #b98457;
+  --mlb-mound: #a8734a;
+  --mlb-fence: #1d3b6b;
+  --mlb-hl: #ffe066;
+  --mlb-def: #1d4f91;
+  --mlb-off: #c8442a;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --mlb-grass: #2f7340; --mlb-foul: #245a2f; }
+}
+
+.mt circle { stroke: #fff; stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.mt-def circle { fill: var(--mlb-def); }
+.mt-off circle { fill: var(--mlb-off); }
+.mt-label { fill: #fff; font-family: var(--font-body); font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.mt.is-active circle { stroke: var(--mlb-hl); stroke-width: 3px; }
+.mt.is-dim { opacity: 0.3; }
+.mt.is-btn { cursor: pointer; }
+.mt.is-btn:hover circle { stroke: var(--mlb-hl); }
+.mt.is-btn:focus { outline: none; }
+.mt.is-btn:focus-visible circle { stroke: var(--mlb-hl); stroke-width: 3.5px; }
+.mb-ball { fill: #fff; stroke: #555; stroke-width: 0.8px; vector-effect: non-scaling-stroke; }
+.mb-stitch { fill: none; stroke: #c8322f; stroke-width: 0.8px; vector-effect: non-scaling-stroke; }
+.mb-shadow { fill: rgb(0 0 0 / 0.3); }
+.mf-dim line { stroke: var(--mlb-hl); stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.mf-dim circle { fill: var(--mlb-hl); }
+.mf-dim .mf-label { fill: var(--mlb-hl); }
+.mf-out { fill: none; stroke: #ff4d4d; stroke-width: 3px; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.mf-arrow { fill: none; stroke-width: 3px; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+
+/* strike zone, count board, innings strip, lineup */
+.mz { display: block; width: 100%; max-width: 420px; margin: 0 auto; height: auto; }
+.mz-zone { fill: rgb(255 224 102 / 0.18); stroke: var(--mlb-hl); stroke-width: 2px; }
+.mz-bg { fill: #2c6a38; }
+.mz-plate { fill: #fff; }
+.mz text { font-family: var(--font-body); font-weight: 700; fill: #fff; text-anchor: middle; }
+.mz-good { fill: #5fd38d; } .mz-bad { fill: #ff7a7a; }
+
+.mc-board { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; padding: 0.8rem; background: #17301c; border-radius: 12px; color: #fff; }
+.mc-row { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.mc-row i { display: inline-block; width: 1.3rem; height: 1.3rem; border-radius: 50%; border: 2px solid #ffffff88; }
+.mc-row i.on-ball { background: #5fd38d; border-color: #5fd38d; }
+.mc-row i.on-strike { background: #ffd24a; border-color: #ffd24a; }
+.mc-row i.on-out { background: #ff7a7a; border-color: #ff7a7a; }
+.mc-result { text-align: center; font-weight: 700; margin: 0.4rem 0 0; color: #fff; }
+
+.mi-wrap { overflow-x: auto; }
+.mi-table { border-collapse: collapse; margin: 0 auto; font-variant-numeric: tabular-nums; color: #fff; background: #17301c; border-radius: 8px; }
+.mi-table th, .mi-table td { padding: 0.35rem 0.6rem; text-align: center; border: 1px solid #ffffff22; font-size: 0.9rem; }
+.mi-table th:first-child, .mi-table td:first-child { text-align: left; }
+.mi-table .is-hl { background: #ffe06633; }
+
+.mp-card { padding: 0.6rem 0.8rem; border-radius: 10px; background: var(--accent-soft); color: var(--text); min-height: 4.2rem; }
+.mp-card strong { display: block; }
+.mp-list { list-style: none; padding: 0; margin: 0 auto; max-width: 22rem; color: #fff; background: #17301c; border-radius: 10px; }
+.mp-list li { display: flex; gap: 0.8rem; padding: 0.35rem 0.8rem; border-bottom: 1px solid #ffffff1f; }
+.mp-list li:last-child { border-bottom: 0; }
+.mp-list b { min-width: 2.2rem; }
+.mp-list li.is-dh { background: #ffe06633; }
+
+.mlb-key { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; }
+.mlb-key i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 50%; margin-right: 0.3rem; vertical-align: -0.1rem; }
+
+/* formulas, checklists, tables, calculators (batting and pitching stats, variations, stealing) */
+.mx-frac { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.6rem; padding: 1rem 0.6rem; background: #17301c; color: #fff; border-radius: 12px; font-variant-numeric: tabular-nums; }
+.mx-name { font-weight: 800; font-size: 1.1rem; }
+.mx-stack { display: inline-grid; justify-items: center; gap: 0.25rem; }
+.mx-top, .mx-bot { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0.25rem 0.5rem; }
+.mx-bar { height: 2px; width: 100%; background: #fff; border-radius: 2px; }
+.mx-term small { opacity: 0.8; font-weight: 700; }
+.mx-term b { font-size: 1.15rem; }
+.mx-op { opacity: 0.8; margin: 0 0.15rem; }
+.mx-res { font: 800 1.7rem/1 var(--font-display); background: #1c8c3c; padding: 0.4rem 0.7rem; border-radius: 8px; }
+.mx-frac + .mx-frac { margin-top: 0.6rem; }
+.mx-stack-col { display: grid; gap: 0.6rem; }
+
+.mx-check { list-style: none; margin: 0 auto; padding: 0.4rem 0.2rem; max-width: 30rem; background: #17301c; color: #fff; border-radius: 12px; }
+.mx-check li { padding: 0.4rem 0.9rem; border-bottom: 1px solid #ffffff1f; }
+.mx-check li:last-child { border-bottom: 0; }
+.mx-check li span { color: #5fd38d; font-weight: 800; margin-right: 0.3rem; }
+
+.mx-table th, .mx-table td { text-align: left; }
+.mx-table td.num, .mx-table th.num { text-align: right; }
+
+.mx-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.7rem; }
+.mx-card { padding: 0.8rem 1rem; border-radius: 12px; background: #17301c; color: #fff; }
+.mx-card h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.mx-card ul { margin: 0; padding-left: 1.1rem; }
+.mx-card.is-bad { background: #3a1c1c; }
+.mx-card p { margin: 0.2rem 0; }
+.mx-big { font: 800 2rem/1.1 var(--font-display); }
+.mx-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+.mx-chips span { background: #17301c; color: #fff; padding: 0.35rem 0.7rem; border-radius: 99px; font-weight: 600; }
+
+.mx-years { display: grid; gap: 0.5rem; }
+.mx-year { display: grid; grid-template-columns: 4rem 1fr; gap: 0.7rem; align-items: baseline; background: #17301c; color: #fff; border-radius: 10px; padding: 0.55rem 0.8rem; }
+.mx-year b { font: 800 1.2rem/1 var(--font-display); color: var(--mlb-hl); }
+
+.mx-sq { display: block; margin: 0 auto; width: 100%; max-width: 420px; height: auto; }
+.mx-sq rect { fill: #fff; stroke: #555; stroke-width: 1.5px; }
+.mx-sq text { font-family: var(--font-body); font-weight: 700; fill: #fff; text-anchor: middle; font-size: 13px; }
+.mx-sq .mx-sq-bg { fill: #17301c; stroke: none; }
+
+.mx-bar-stack { display: flex; height: 2.4rem; border-radius: 8px; overflow: hidden; border: 1px solid #ffffff55; }
+.mx-bar-stack span { display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 0.8rem; min-width: 0; overflow: hidden; }
+.mx-seg { display: flex; gap: 0.5rem 1rem; flex-wrap: wrap; margin-top: 0.5rem; color: #fff; font-size: 0.85rem; }
+.mx-seg i { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 3px; margin-right: 0.3rem; vertical-align: -0.1rem; }
+
+/* calculators */
+.mx-calc { display: grid; gap: 0.9rem; }
+.mx-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 0.6rem; }
+.mx-inputs label { display: grid; gap: 0.2rem; font-weight: 600; font-size: 0.85rem; }
+.mx-inputs input, .mx-inputs select { font: inherit; padding: 0.45rem 0.55rem; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); min-width: 0; width: 100%; box-sizing: border-box; }
+.mx-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 0.6rem; }
+.mx-out div { background: #17301c; color: #fff; border-radius: 10px; padding: 0.55rem 0.7rem; text-align: center; }
+.mx-out small { display: block; opacity: 0.85; font-weight: 700; }
+.mx-out b { font: 800 1.5rem/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
+.mx-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.mx-actions button { font: inherit; padding: 0.45rem 0.8rem; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
+.mx-actions button:hover { border-color: var(--accent); }
+.mx-msg { margin: 0; font-size: 0.9rem; }
+.mx-msg.is-warn { color: var(--text); font-weight: 700; }
+
+/* innings pitched: three dots (outs) per inning */
+.mx-inns { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; padding: 0.8rem; background: #17301c; border-radius: 12px; }
+.mx-inn { display: inline-flex; gap: 0.2rem; align-items: center; justify-content: center; min-width: 2.6rem; padding: 0.45rem; border: 2px solid #ffffff44; border-radius: 8px; color: #fff; }
+.mx-inn i { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 2px solid #ffffff66; }
+.mx-inn i.on { background: #ff7a7a; border-color: #ff7a7a; }
+.mx-inn.is-need { background: #1c8c3c; border-color: #5fd38d; }
