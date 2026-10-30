@@ -15,6 +15,11 @@ export default function LessonPage() {
   return (
     <>
       <h1 className="lesson-title">{t(`${topic.id}.lessons.${lesson.id}.title`)}</h1>
+      {lesson.wip && (
+        <p className="wip-note" role="note">
+          <strong>{t('ui.topic.wip')}</strong> {t('ui.topic.wipNote')}
+        </p>
+      )}
       <Deck
         slides={lesson.slides}
         textPath={`${topic.id}.slides`}

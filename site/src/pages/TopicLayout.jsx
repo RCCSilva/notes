@@ -59,7 +59,7 @@ export default function TopicLayout() {
               <li key={lesson.id} className={`sidebar-lesson ${here ? 'is-here' : ''}`}>
                 <Link to={`${base}/${lesson.id}`} className="sidebar-lesson-row">
                   <span className="sidebar-num">{i + 1}</span>
-                  <span className="sidebar-lesson-title">{title}</span>
+                  <span className="sidebar-lesson-title">{title}{lesson.wip && <small className="wip-badge">{t('ui.topic.wip')}</small>}</span>
                   {level}
                 </Link>
                 <ol className="sidebar-slides">

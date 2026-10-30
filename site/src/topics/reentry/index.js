@@ -12,10 +12,10 @@ export default {
   resolveRef,
   // Ordered by level: basic, intermediate, advanced. Lessons without slides show as "coming soon".
   lessons: [
-    { id: 'orbits', level: 'basic', slides: ORBIT_SLIDES },
+    { id: 'orbits', level: 'basic', wip: true, slides: ORBIT_SLIDES },
     { id: 'mercury', level: 'basic' },
-    { id: 'geminiComm', level: 'intermediate', slides: GEMINI_COMM_SLIDES },
-    { id: 'geminiLeft', level: 'intermediate', slides: GEMINI_LEFT_SLIDES },
+    { id: 'geminiComm', level: 'intermediate', wip: true, slides: GEMINI_COMM_SLIDES },
+    { id: 'geminiLeft', level: 'intermediate', wip: true, slides: GEMINI_LEFT_SLIDES },
     { id: 'geminiRight', level: 'intermediate', slides: GEMINI_RIGHT_SLIDES },
     { id: 'apollo', level: 'advanced' },
     { id: 'orbitMath', level: 'advanced' },

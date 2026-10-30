@@ -26,6 +26,7 @@ export default function TopicHub() {
               <span className="lesson-main">
                 <strong>{t(`${topic.id}.lessons.${lesson.id}.title`)}</strong>
                 <span>{t(`${topic.id}.lessons.${lesson.id}.summary`)}</span>
+                {lesson.wip && <span className="wip-badge">{t('ui.topic.wip')}</span>}
               </span>
               <span className={`badge lvl-${lesson.level}`}>{t(`ui.topic.level.${lesson.level}`)}</span>
               <span className="lesson-meta">

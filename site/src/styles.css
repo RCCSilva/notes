@@ -356,3 +356,9 @@ a.lesson:hover { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Under construction marker (lessons with `wip: true`): text + dashed outline, not color alone. */
+.wip-badge { display: inline-block; align-self: flex-start; margin-top: 0.3rem; font-size: 0.72rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 99px; background: var(--warn-bg); color: var(--warn-text); border: 1px dashed var(--warn-line); }
+.lesson-main span.wip-badge { color: var(--warn-text); font-size: 0.72rem; }
+.sidebar-lesson-title small.wip-badge { display: inline-block; color: var(--warn-text); font-size: 0.68rem; font-weight: 700; }
+.wip-note { margin: 0 0 0.8rem; padding: 0.45rem 0.8rem; font-size: 0.88rem; background: var(--warn-bg); color: var(--warn-text); border: 1px dashed var(--warn-line); border-radius: 8px; }

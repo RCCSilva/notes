@@ -14,6 +14,8 @@ export default {
     lessons: 'Lessons',
     level: { basic: 'Basic', intermediate: 'Intermediate', advanced: 'Advanced' },
     soon: 'Coming soon',
+    wip: 'Under construction',
+    wipNote: 'This lesson is still being reviewed; it may contain mistakes.',
     slides: '{n} slides',
   },
   scene: {

@@ -14,6 +14,8 @@ export default {
     lessons: 'Lecciones',
     level: { basic: 'Básico', intermediate: 'Intermedio', advanced: 'Avanzado' },
     soon: 'Próximamente',
+    wip: 'En construcción',
+    wipNote: 'Esta lección todavía se está revisando; puede contener errores.',
     slides: '{n} diapositivas',
   },
   scene: {
