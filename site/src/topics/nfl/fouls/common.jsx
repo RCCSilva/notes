@@ -1,9 +1,9 @@
-import Field from '../../../components/field/Field';
-import { Player, Ball, FieldLine, UprightText, PenaltyFlag } from '../../../components/field/pieces';
-import { fx, MID_Y } from '../../../components/field/geometry';
-import { seg, lerp, along } from '../../../components/field/motion';
+import Field from '../components/field/Field';
+import { Player, Ball, FieldLine, UprightText, PenaltyFlag } from '../components/field/pieces';
+import { fx, MID_Y } from '../components/field/geometry';
+import { seg, lerp, along } from '../../../components/motion';
 import { StillScene, FluidScene, Legend, StateLine } from '../../../components/scene/Scene';
-import RefereeSignal from '../../../components/referee/RefereeSignal';
+import RefereeSignal from '../components/referee/RefereeSignal';
 import { useI18n } from '../../../i18n/I18n';
 import { OFFENSE, DEFENSE } from '../formations';
 import { Pop, kickArc } from '../basics/visuals';

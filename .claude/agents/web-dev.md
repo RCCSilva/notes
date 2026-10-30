@@ -11,8 +11,8 @@ You know the site's structure and tech. You are **not** a subject expert: you ne
 ## Rules
 - Static site only: React, built to static files, no backend.
 - Keep it simple: a landing page, a hub page per topic, lessons ordered basic → intermediate → advanced.
-- Lessons are tap-through slide decks (`components/deck/Deck.jsx`). Each slide has one idea, one visual, 1–2 short sentences, and source chips. Animations should explain something (a play, a calculation), never just decorate.
-- Reuse `components/field/Field.jsx` for anything on a field. Its geometry comes from Rulebook Rule 1; don't change the dimensions.
+- Lessons are tap-through slide decks (`components/deck/Deck.jsx`). Global components live in `site/src/components/`; a component only one topic uses lives in `topics/<topic>/components/` (see "Global vs. topic components" in CLAUDE.md). Each slide has one idea, one visual, 1–2 short sentences, and source chips. Animations should explain something (a play, a calculation), never just decorate.
+- Reuse `topics/nfl/components/field/Field.jsx` for anything on an NFL field. Its geometry comes from Rulebook Rule 1; don't change the dimensions.
 - Every user-visible string is translated into en, es and pt-BR (see CLAUDE.md → i18n). Never hard-code text in components.
 - Content comes from `research/<topic>/*.md`. Every slide lists its refs (`[sourceId, rule, pdfPage]`), shown as links to the source.
 - If a page needs a fact that isn't in the notes, stop and report what's missing so the researcher can source it.

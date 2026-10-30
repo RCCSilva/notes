@@ -28,7 +28,7 @@ If web-dev needs a fact that isn't in the notes, it asks for research. It does n
 ## Tech
 
 - React 19 + Vite, built to static files (`site/dist`). Hash routing (`#/en/nfl/basics?s=3`), so any static host works.
-- No UI or animation libraries. The field is hand-drawn SVG, to scale from Rulebook Rule 1 (`site/src/components/field/`). Animations use `requestAnimationFrame` timelines (`motion.js`) and CSS. Use D3 later only for data charts (e.g. the salary cap).
+- No UI or animation libraries. The field is hand-drawn SVG, to scale from Rulebook Rule 1 (`site/src/topics/nfl/components/field/`). Animations use `requestAnimationFrame` timelines (`site/src/components/motion.js`) and CSS. Use D3 later only for data charts (e.g. the salary cap).
 - Respect `prefers-reduced-motion`: timelines jump to their end state.
 - Commands (in `site/`): `npm run dev`, `npm run build`, `npm run preview`, `npm test` (Vitest + jsdom, tests in `src/__tests__/`).
 - Deploy: every push to `main` runs the tests, builds `site/` and publishes it to GitHub Pages (`.github/workflows/deploy.yml`) at https://notes.rccsilva.com/ (custom domain: `site/public/CNAME`).
@@ -70,17 +70,30 @@ research/              cited notes, one folder per topic
     raw/               archived source PDFs (cite these)
     NN-<subject>.md    notes, ordered basic → advanced
 site/src/
-  components/field/    Field (SVG), players/ball, motion helpers
-  components/deck/     slide deck
-  components/scene/    the shared frame for slide visuals (still / fluid / stop motion)
-  components/referee/  the referee figure and the official signals (drawn from the rulebook's descriptions)
-  pages/TopicLayout    sidebar: every lesson of a topic, with live lessons' slides nested below
+  components/          global: used by two or more topics, or by the site itself
+    deck/              slide deck
+    scene/             the shared frame for slide visuals (still / fluid / stop motion)
+    motion.js          requestAnimationFrame timelines, easing, reduced motion
+  pages/               home, topic hub, lesson page, layouts
   i18n/                locale config + UI strings
-  topics/registry.js   topics → lessons
-  topics/<topic>/      sources.js, messages/, <lesson>/slides.js + visuals.jsx
+  styles.css           global styles only (no topic-specific rules)
+  topics/registry.js   the list of topics (grouped by section on the home)
+  topics/sections.js   the home's sections, in order
+  topics/<topic>/      one self-contained folder per topic; its structure is its own
+    index.js           the topic's definition: id, lessons, resolveRef, optional card `Art`
+    sources.js, messages/, <topic>.css, <lesson>/slides.js + visuals.jsx
+    components/        components only this topic uses (NFL: field/, referee/)
 ```
 
 ## Content structure
 
 Each topic = one hub page + pages ordered by level: **basic → intermediate → advanced**.
-Adding a topic means adding `research/<topic>/` and its pages. Don't change the structure for it.
+Adding a topic means adding `research/<topic>/`, a `site/src/topics/<topic>/` folder and one line in `registry.js`. Don't change the site structure for it.
+
+The home groups topics into **sections** (`sports`, `simulators`, …) with a title and one-line description each. Sections are for the home only: URLs have no section segment. A topic declares `section: '<id>'` in its `index.js`; an unknown section throws. A new section = one id in `topics/sections.js` + `ui.home.sections.<id>` titles in the 3 languages; empty sections are hidden.
+
+## Global vs. topic components
+
+- A component used by only one topic lives in that topic's `components/` (e.g. the NFL field and referee). Topics don't import from each other.
+- Once a second topic needs it, move it to `site/src/components/` and make it topic-agnostic (no topic strings, styles or facts inside). Examples of global pieces: deck, scene, tables, links, containers.
+- Global code (`components/`, `pages/`, `i18n/`, `styles.css`) never imports from `topics/` except through `topics/registry.js` (and the i18n loader, which picks up every `topics/*/messages/`).

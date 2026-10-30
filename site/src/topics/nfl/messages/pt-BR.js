@@ -1,6 +1,7 @@
 export default {
   name: 'NFL',
   blurb: 'Futebol americano, de "o que é uma descida?" até como funciona o teto salarial.',
+  field: 'Ilustração no campo',
   lessons: {
     basics: { title: 'Como o futebol americano funciona', summary: 'O campo, as descidas, correr, passar e como pontuar.' },
     game: { title: 'Como acompanhar a partida', summary: 'Quartos, o relógio, os timeouts e como ler o placar.' },

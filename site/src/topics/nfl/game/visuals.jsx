@@ -1,5 +1,5 @@
 import { useI18n } from '../../../i18n/I18n';
-import { useTimeline, seg } from '../../../components/field/motion';
+import { useTimeline, seg } from '../../../components/motion';
 import './game.css';
 
 // Visuals for "The game" (research/nfl/02-the-game.md).

@@ -1,6 +1,7 @@
 export default {
   name: 'NFL',
   blurb: 'Fútbol americano, desde "¿qué es un down?" hasta cómo funciona el tope salarial.',
+  field: 'Ilustración en el campo',
   lessons: {
     basics: { title: 'Cómo funciona el fútbol americano', summary: 'El campo, los downs, correr, pasar y cómo anotar.' },
     game: { title: 'Cómo seguir un partido', summary: 'Cuartos, el reloj, los tiempos fuera y cómo leer el marcador.' },

@@ -1,7 +1,7 @@
-import Field from '../../../components/field/Field';
-import { Player, Ball, FieldLine, UprightText, PenaltyFlag } from '../../../components/field/pieces';
-import { fx, MID_Y } from '../../../components/field/geometry';
-import { seg } from '../../../components/field/motion';
+import Field from '../components/field/Field';
+import { Player, Ball, FieldLine, UprightText, PenaltyFlag } from '../components/field/pieces';
+import { fx, MID_Y } from '../components/field/geometry';
+import { seg } from '../../../components/motion';
 import { StillScene, FluidScene, StopMotionScene, Legend, StateLine } from '../../../components/scene/Scene';
 import { useI18n } from '../../../i18n/I18n';
 import { OFFENSE, DEFENSE } from '../formations';

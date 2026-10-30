@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { prefersReducedMotion } from '../field/motion';
+import { prefersReducedMotion } from '../../../../components/motion';
 import { SIGNALS, P } from './signals';
 import './referee.css';
 

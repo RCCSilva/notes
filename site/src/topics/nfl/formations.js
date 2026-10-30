@@ -1,4 +1,4 @@
-import { MID_Y } from '../../components/field/geometry';
+import { MID_Y } from './components/field/geometry';
 
 // Player spots relative to the line of scrimmage: dx in yards (offense negative, defense positive),
 // y in yards from the top sideline. Sources: research/nfl/02-positions.md.

@@ -1,7 +1,7 @@
-import Field from '../../../components/field/Field';
-import { Player, Ball, FieldLine } from '../../../components/field/pieces';
-import { fx, MID_Y, WIDTH } from '../../../components/field/geometry';
-import { seg, along } from '../../../components/field/motion';
+import Field from '../components/field/Field';
+import { Player, Ball, FieldLine } from '../components/field/pieces';
+import { fx, MID_Y, WIDTH } from '../components/field/geometry';
+import { seg, along } from '../../../components/motion';
 import { StillScene, FluidScene, Legend } from '../../../components/scene/Scene';
 import { useI18n } from '../../../i18n/I18n';
 import './tactics.css';

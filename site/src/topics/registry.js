@@ -1,37 +1,20 @@
-import { BASICS_SLIDES, POSITIONS_SLIDES } from './nfl/basics/slides';
-import { GAME_SLIDES } from './nfl/game/slides';
-import { OVERTIME_SLIDES } from './nfl/overtime/slides';
-import { FOULS_SLIDES, COMMON_FOULS_SLIDES } from './nfl/fouls/slides';
-import { SEASON_SLIDES } from './nfl/season/slides';
-import { DEFENSE_TACTICS_SLIDES } from './nfl/tactics/slides';
-import { DRAFT_SLIDES } from './nfl/draft/slides';
-import { TRADES_SLIDES, TAGS_SLIDES, CAP_SLIDES, CONTRACTS_SLIDES } from './nfl/money/slides';
-import { resolveRef as nflRef } from './nfl/sources';
+import nfl from './nfl';
+import reentry from './reentry';
+import mlb from './mlb';
+import { SECTIONS } from './sections';
 
-// All topics. A lesson with `slides` is live; without it, it shows as "coming soon".
-// Titles and text come from i18n: `<topic>.lessons.<lessonId>.*`.
-export const TOPICS = [
-  {
-    id: 'nfl',
-    resolveRef: nflRef,
-    lessons: [
-      { id: 'basics', level: 'basic', slides: BASICS_SLIDES },
-      { id: 'game', level: 'basic', slides: GAME_SLIDES },
-      { id: 'positions', level: 'basic', slides: POSITIONS_SLIDES },
-      { id: 'fouls', level: 'basic', slides: FOULS_SLIDES },
-      { id: 'overtime', level: 'basic', slides: OVERTIME_SLIDES },
-      { id: 'season', level: 'basic', slides: SEASON_SLIDES },
-      { id: 'commonFouls', level: 'intermediate', slides: COMMON_FOULS_SLIDES },
-      { id: 'defenseTactics', level: 'intermediate', slides: DEFENSE_TACTICS_SLIDES },
-      { id: 'draft', level: 'intermediate', slides: DRAFT_SLIDES },
-      { id: 'trades', level: 'intermediate', slides: TRADES_SLIDES },
-      { id: 'contracts', level: 'intermediate', slides: CONTRACTS_SLIDES },
-      { id: 'strategy', level: 'intermediate' },
-      { id: 'matchCoverage', level: 'advanced' },
-      { id: 'cap', level: 'advanced', slides: CAP_SLIDES },
-      { id: 'tags', level: 'advanced', slides: TAGS_SLIDES },
-    ],
-  },
-];
+// All topics. Each topic is self-contained in its folder (lessons, messages, sources, its own components)
+// and exports its definition from index.js. A lesson with `slides` is live; without it, it shows as "coming soon".
+// Titles and text come from i18n: `<topic>.lessons.<lessonId>.*`. Optional `Art`: the topic card's picture.
+export const TOPICS = [nfl, reentry, mlb];
 
 export const findTopic = (id) => TOPICS.find((t) => t.id === id);
+
+// The home groups topics by `topic.section` (an id from sections.js), in section order, keeping registry order inside each.
+// A topic with a missing or unknown section is a programming error: throw so tests and the build catch it.
+export function groupBySection(topics = TOPICS) {
+  for (const topic of topics) {
+    if (!SECTIONS.includes(topic.section)) throw new Error(`Topic "${topic.id}" has unknown section "${topic.section}". Known: ${SECTIONS.join(', ')}`);
+  }
+  return SECTIONS.map((id) => ({ id, topics: topics.filter((t) => t.section === id) })).filter((s) => s.topics.length);
+}

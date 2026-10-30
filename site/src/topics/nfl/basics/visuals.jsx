@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Field from '../../../components/field/Field';
-import { Player, Ball, FieldLine, UprightText } from '../../../components/field/pieces';
-import { fx, MID_Y, LENGTH, BORDER, END_ZONE, WIDTH } from '../../../components/field/geometry';
-import { seg, lerp, along } from '../../../components/field/motion';
+import Field from '../components/field/Field';
+import { Player, Ball, FieldLine, UprightText } from '../components/field/pieces';
+import { fx, MID_Y, LENGTH, BORDER, END_ZONE, WIDTH } from '../components/field/geometry';
+import { seg, lerp, along } from '../../../components/motion';
 import { StillScene, FluidScene, StopMotionScene, Legend, Hint, StateLine } from '../../../components/scene/Scene';
 import { useI18n } from '../../../i18n/I18n';
 import { OFFENSE, DEFENSE } from '../formations';

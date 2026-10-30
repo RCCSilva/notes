@@ -141,7 +141,7 @@
   color: var(--muted);
   margin: 0;
 }
-.slide-refs a {
+.slide-refs a, .slide-refs .ref-nolink {
   color: inherit;
   text-decoration: none;
   padding: 0.15rem 0.5rem;

@@ -3,9 +3,12 @@ export default {
   home: {
     lead: 'Short, visual lessons you can tap through. Every fact links to its source.',
     topics: 'Topics',
+    sections: {
+      sports: { title: 'Sports', desc: 'Rules, strategy and the money behind the games.' },
+      simulators: { title: 'Simulators & games', desc: 'Hands-on panels and simulators you can play with.' },
+    },
   },
   footer: { feedback: 'Found a mistake or have a suggestion?', issues: 'Open an issue on GitHub', code: 'Site code on GitHub' },
-  field: 'Illustration on the field',
   nav: { home: 'Home', language: 'Language', contents: 'Contents' },
   topic: {
     lessons: 'Lessons',

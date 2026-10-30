@@ -1,5 +1,5 @@
 import { useI18n } from '../../../i18n/I18n';
-import { useTimeline } from '../../../components/field/motion';
+import { useTimeline } from '../../../components/motion';
 import './overtime.css';
 
 // Visuals for "Ties & overtime" (research/nfl/05-overtime.md). Scores and teams are EXAMPLES.

@@ -128,6 +128,7 @@ export default function Deck({ slides, textPath, resolveRef, footer }) {
                 <span>{t('ui.deck.source')}:</span>
                 {slide.refs.map((r, i) => {
                   const ref = resolveRef(r);
+                  if (!ref.href) return <span key={i} className="ref-nolink" title={ref.title}>{ref.label}</span>;
                   return (
                     <a key={i} href={ref.href} target="_blank" rel="noreferrer" title={ref.title}>{ref.label}</a>
                   );

@@ -2,6 +2,7 @@
 export default {
   name: 'NFL',
   blurb: 'American football, from "what is a down?" to how the salary cap works.',
+  field: 'Illustration on the field',
   lessons: {
     basics: { title: 'How football works', summary: 'The field, downs, running, passing and how to score.' },
     game: { title: 'Following a game', summary: 'Quarters, the clock, timeouts and how to read the scoreboard.' },
