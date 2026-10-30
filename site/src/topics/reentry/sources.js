@@ -24,6 +24,12 @@ export const SOURCES = {
     url: 'http://prdownloads.sourceforge.net/mscorbaddon/GeminiManualVol2Sec2.pdf?download',
     page: (p) => `#page=${p}`,
   },
+  S9: {
+    short: 'NASA Gemini SEDR 300 Vol II suppl. (NTRS)',
+    title: 'NASA NTRS 20160009472, Project Gemini Familiarization Manual SEDR 300, Vol II supplement (separate scan)',
+    url: 'https://ntrs.nasa.gov/api/citations/20160009472/downloads/20160009472.pdf',
+    page: (p) => `#page=${p}`,
+  },
   S8: {
     short: 'NASA Gemini SEDR 300 Vol I (GT-3/4/7)',
     title: 'Project Gemini Familiarization Manual SEDR 300, Vol I: Long Range and Modified Configurations (spacecraft GT-3, 4, 7: a different configuration)',

@@ -70,6 +70,22 @@ describe('reentry topic', () => {
     expect(screen.getByRole('button', { name: 'LANDING: SAFE' })).toBeTruthy();
   });
 
+  it('right panel: 41 controls, conflict status and the three after-landing readings', async () => {
+    await open('#/en/reentry/geminiRight?s=2');
+    expect(document.querySelectorAll('.pn-control[role="button"]')).toHaveLength(41);
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: /After landing: game manual/ })); });
+    expect(screen.getByRole('button', { name: 'SQUIB BATTERIES 2: OFF' })).toBeTruthy();
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: /After landing: NASA, 1st sentence/ })); });
+    expect(screen.getByRole('button', { name: 'SQUIB BATTERIES 1: OFF' })).toBeTruthy();
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'SQUIB BATTERIES 3: OFF' })); });
+    expect(document.body.textContent).toMatch(/The sources disagree/);
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'EMER REL: COVERED' })); });
+    expect(screen.getByRole('button', { name: 'EMER REL: PRESSED' })).toBeTruthy();
+    expect(document.body.textContent).toMatch(/permanently removes the docking ability/);
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'SEQ INST: UP' })); });
+    expect(document.body.textContent).toMatch(/Function not yet verified/);
+  });
+
   it('orbit simulator: a real preset shows the opposite side rising; retro at the high point lowers the low point; slide chips link to sources', async () => {
     await open('#/en/reentry/orbits?s=3');
     await act(async () => { fireEvent.click(screen.getByRole('button', { name: /Gemini VI-A: \+4 m\/s/ })); });

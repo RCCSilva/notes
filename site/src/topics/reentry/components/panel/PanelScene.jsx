@@ -50,15 +50,21 @@ function Control({ c, index, selected, dim, onOperate, onSelect }) {
       }}
     >
       <rect className="pn-hit" x="-22" y="-26" width="44" height="52" />
-      {c.type === 'selector' ? <circle className="pn-knob" r="13" /> : c.type === 'breaker' ? (
+      {c.type === 'button' ? (
+        <g className={`pn-pushbtn ${index === 1 ? 'is-pressed' : ''}`}>
+          <circle className="pn-knob" r="11" />
+          <circle className="pn-cap-btn" r={index === 1 ? 6 : 8} />
+          {index === 0 && <circle className="pn-cover" r="12" />}
+        </g>
+      ) : c.type === 'selector' ? <circle className="pn-knob" r="13" /> : c.type === 'breaker' ? (
         <polygon className="pn-nut" points="-9,0 -4.5,-7.8 4.5,-7.8 9,0 4.5,7.8 -4.5,7.8" />
       ) : (
         <rect className="pn-slot" x={c.orient === 'h' ? -15 : -5} y={c.orient === 'h' ? -5 : -15} width={c.orient === 'h' ? 30 : 10} height={c.orient === 'h' ? 10 : 30} rx="5" />
       )}
-      <g className="pn-lever" style={{ transform: `rotate(${pose.angle}deg) scaleY(${pose.scale})` }}>
+      {c.type !== 'button' && <g className="pn-lever" style={{ transform: `rotate(${pose.angle}deg) scaleY(${pose.scale})` }}>
         <line x1="0" y1="0" x2="0" y2={c.type === 'selector' ? -13 : -12} />
         {c.type !== 'selector' && <circle cy="-12" r="4.2" />}
-      </g>
+      </g>}
       {c.type === 'selector' && <circle className="pn-cap" r="3" />}
       {!c.quiet && (
         <g aria-hidden="true">

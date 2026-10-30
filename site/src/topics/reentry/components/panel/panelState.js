@@ -2,8 +2,9 @@
 //   { id, width, height, texts: [{ x, y, text, size?, anchor?, bold? }], controls: [control] }
 // A control:
 //   { id, type: 'toggle' | 'breaker' | 'selector' | 'display', x, y, label, page,
+//     button: a covered push button, states ['COVERED', 'PRESSED'] (no lever; the cover shows while COVERED),
 //     breaker: a 2-state circuit breaker toggle, states ['CLOSED', 'OPEN'] (closed = up); `quiet: true` hides state labels,
-//     status?: 'nasa' | 'partial' | 'vol1' | 'inferred' | 'unverified' (how well the research documents it),
+//     status?: 'nasa' | 'partial' | 'vol1' | 'inferred' | 'unverified' | 'conflict' (how well the research documents it),
 //     refs?: [[sourceId, locator, pdfPage]] source chips for the readout (default: the game manual pages),
 //     states: [printed position labels, in physical order: top→bottom or left→right],
 //     orient?: 'v' | 'h' (toggle), angles?: [deg per state] (selector), initial?: index,
@@ -11,7 +12,7 @@
 //     wrap?: stack long labels }
 // State = { [controlId]: index of the current position }.
 
-export const isOperable = (c) => c.type === 'toggle' || c.type === 'breaker' || c.type === 'selector';
+export const isOperable = (c) => c.type === 'toggle' || c.type === 'breaker' || c.type === 'selector' || c.type === 'button';
 
 export function validatePanel(panel) {
   const problems = [];
@@ -25,9 +26,10 @@ export function validatePanel(panel) {
       if (!Array.isArray(c.states) || c.states.length < 2) problems.push(`${c.id}: needs 2+ states`);
       if ((c.initial ?? 0) >= (c.states?.length ?? 0)) problems.push(`${c.id}: initial out of range`);
       if (c.type === 'breaker' && c.states?.length !== 2) problems.push(`${c.id}: a breaker has exactly 2 states`);
+      if (c.type === 'button' && c.states?.length !== 2) problems.push(`${c.id}: a button has exactly 2 states`);
       if (c.type === 'selector' && c.angles?.length !== c.states?.length) problems.push(`${c.id}: one angle per state`);
       if (c.refs && !c.refs.every((r) => Array.isArray(r) && r[0] && r[2])) problems.push(`${c.id}: refs need [source, locator, page]`);
-      if (c.status && !['nasa', 'partial', 'vol1', 'inferred', 'unverified'].includes(c.status)) problems.push(`${c.id}: unknown status`);
+      if (c.status && !['nasa', 'partial', 'vol1', 'inferred', 'unverified', 'conflict'].includes(c.status)) problems.push(`${c.id}: unknown status`);
       if (c.status === 'unverified' && c.fn) problems.push(`${c.id}: unverified control cannot have a documented function`);
       if (c.fn && !c.fnPage) problems.push(`${c.id}: documented function without a page`);
     }

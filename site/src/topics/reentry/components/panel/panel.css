@@ -34,6 +34,7 @@
 .pn-readout p { margin: 0; }
 .pn-r-head { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; align-items: baseline; font-size: 1rem; }
 .pn-status { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+.pn-status.is-conflict { color: #c0392b; }
 .pn-status.is-partial, .pn-status.is-vol1, .pn-status.is-inferred { color: #b07a00; }
 .pn-unverified { color: var(--muted); font-style: italic; }
 .pn-rule { color: var(--muted); font-size: 0.82rem; }
@@ -51,3 +52,7 @@
 @media (prefers-reduced-motion: reduce) {
   .pn-lever, .pn-state, .pn-control { transition: none; }
 }
+
+.pn-cap-btn { fill: #d9453f; stroke: #14161a; stroke-width: 1; transition: r 0.18s; }
+.pn-cover { fill: rgba(150, 190, 220, 0.35); stroke: #9fc3de; stroke-width: 1.2; }
+@media (prefers-reduced-motion: reduce) { .pn-cap-btn { transition: none; } }
