@@ -1,0 +1,53 @@
+/* Panel engine: an original SVG redraw (no manual images). Printed labels stay as printed (English). */
+.pn-scroll { overflow-x: auto; background: #1b1e24; }
+.pn-svg { display: block; width: 100%; min-width: 600px; height: auto; user-select: none; }
+.pn-face { fill: #2d3138; }
+.pn-line { stroke: #596070; stroke-width: 1; }
+.pn-text { fill: #e6e3da; font: 600 7.5px var(--font-display, sans-serif); }
+.pn-text.is-bold { font-weight: 800; font-size: 8.5px; }
+.pn-state { fill: #aeb3bf; font: 600 7px var(--font-display, sans-serif); transition: fill 0.2s; }
+.pn-state.is-now { fill: #ffd24a; font-weight: 800; }
+
+.pn-control { cursor: pointer; outline: none; transition: opacity 0.2s; }
+.pn-control.is-dim { opacity: 0.45; }
+.pn-hit { fill: transparent; }
+.pn-slot { fill: #14161a; stroke: #6d7585; stroke-width: 1; }
+.pn-nut { fill: #14161a; stroke: #8a92a3; stroke-width: 1.3; }
+.pn-knob { fill: #14161a; stroke: #8a92a3; stroke-width: 1.5; }
+.pn-cap { fill: #6d7585; }
+.pn-lever line { stroke: #c9ccd4; stroke-width: 3.2; stroke-linecap: round; }
+.pn-lever circle { fill: #d9453f; }
+.pn-lever { transition: transform 0.18s ease-out; }
+.pn-control:hover .pn-slot,
+.pn-control:hover .pn-nut,
+.pn-control:hover .pn-nut { fill: #14161a; stroke: #8a92a3; stroke-width: 1.3; }
+.pn-knob { stroke: #ffd24a; }
+.pn-control:focus-visible .pn-hit,
+.pn-control.is-selected .pn-hit { stroke: #ffd24a; stroke-width: 1.5; stroke-dasharray: 3 2; rx: 6; }
+.pn-control:not(.is-dim).is-toggle:not(.is-selected) .pn-slot { stroke: #6d7585; }
+
+.pn-control.is-display { cursor: default; }
+.pn-disp { fill: #0e1013; stroke: #596070; }
+.is-display text { fill: #f1efe6; font: 700 11px ui-monospace, monospace; }
+
+.pn-readout { width: 100%; color: var(--text); display: grid; gap: 0.35rem; min-height: 6.5rem; align-content: start; }
+.pn-readout p { margin: 0; }
+.pn-r-head { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; align-items: baseline; font-size: 1rem; }
+.pn-status { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+.pn-status.is-partial, .pn-status.is-vol1, .pn-status.is-inferred { color: #b07a00; }
+.pn-unverified { color: var(--muted); font-style: italic; }
+.pn-rule { color: var(--muted); font-size: 0.82rem; }
+.pn-refs { display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem; align-items: center; font-size: 0.75rem; color: var(--muted); }
+.pn-refs a { color: inherit; text-decoration: none; padding: 0.1rem 0.45rem; border: 1px solid var(--line); border-radius: 99px; }
+.pn-refs a:hover { color: var(--text); border-color: var(--accent); }
+
+.pn-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; width: 100%; }
+.pn-preset {
+  font: inherit; font-weight: 700; color: var(--text); background: var(--surface);
+  border: 1px solid var(--accent); border-radius: 99px; padding: 0.4rem 0.9rem; cursor: pointer;
+}
+.pn-preset:hover { background: var(--accent); color: var(--on-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-lever, .pn-state, .pn-control { transition: none; }
+}

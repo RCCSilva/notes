@@ -1,0 +1,334 @@
+// Contenido del tema Reentry. Todo hecho sale de research/reentry/*.md. Las etiquetas impresas del panel se dejan como están impresas.
+export default {
+  name: 'Paneles de Reentry (prueba de concepto)',
+  blurb: "PRUEBA DE CONCEPTO: redibujos interactivos de los paneles de la cabina del simulador espacial Reentry, hechos a partir de sus manuales de vuelo y del manual Gemini de la NASA. Por ahora dos paneles: el panel de comunicaciones del Gemini y el panel izquierdo de interruptores y disyuntores del Gemini. Una lección básica explica además las órbitas, con un simulador de encendidos.",
+  lessons: {
+    orbits: {"title": "Órbitas para principiantes", "summary": "Prueba de concepto: caer alrededor de la Tierra, apogeo y perigeo, y un simulador de encendidos."},
+    mercury: { title: "Mercury: la cápsula y sus paneles", summary: "Planificada: la cápsula Mercury y los paneles de su cabina." },
+    geminiComm: { title: 'Gemini: panel de comunicaciones', summary: 'Prueba de concepto: un panel interactivo. Toca los interruptores y mira qué dice el manual.' },
+    geminiLeft: { title: "Gemini: panel izquierdo de interruptores y disyuntores", summary: "Prueba de concepto: 42 disyuntores e interruptores de squib. Tócalos, mira qué documenta la NASA y qué falta verificar." },
+    apollo: { title: "Apollo: el módulo de mando", summary: "Planificada: el módulo de mando Apollo y los paneles de su cabina." },
+    orbitMath: { title: "Matemática orbital: las fórmulas detrás del simulador", summary: "Planificada: las fórmulas detrás del simulador de órbitas, explicadas paso a paso." },
+  },
+  panel: {
+    names: { 'gemini-comm': 'Panel de comunicaciones del Gemini (nuestro redibujo)' , 'gemini-left': "Panel izquierdo de interruptores y disyuntores del Gemini (nuestro redibujo)" },
+    hint: 'Toca un control para moverlo. Clic derecho o las flechas del teclado vuelven atrás.',
+    pickOne: 'Toca un control para ver su posición y lo que dice el manual sobre él.',
+    position: 'Posición',
+    inGame: 'En el juego',
+    unverified: 'Función aún no verificada: el texto del manual que leímos no dice qué hace.',
+  },
+  rule: {
+    switchV: 'Interruptor vertical: clic izquierdo lo sube, clic derecho lo baja.',
+    switchH: 'Interruptor horizontal: clic izquierdo lo mueve a la izquierda, clic derecho a la derecha.',
+    selector: 'Selector: clic derecho lo gira hacia la derecha (sentido antihorario), clic izquierdo hacia la izquierda (sentido horario).',
+  },
+  fn: {
+    mode1: 'Elige la radio. Ponlo en HF (con HF select en RNTY) para usar HF. UHF es la radio principal en órbita; HF hace falta después de la reentrada.',
+    mode2: 'Elige la radio. Ponlo en HF (con HF select en RNTY) para usar HF. UHF es la radio principal en órbita; HF hace falta después de la reentrada.',
+    hfSel: 'Ponlo en RNTY para elegir la radio HF.',
+    hfAnt: 'Extiende o retrae la antena HF. En la inserción ponlo en EXT: la antena HF se extiende en un minuto. Luego ponlo en OFF. Se retrae antes de la separación del adaptador, lo que puede tardar más de un minuto.',
+    sBand: 'Ponlo en CMD en la inserción.',
+    cBand: 'Ponlo en CMD en la inserción.',
+    tm: 'Ponlo en R/T & ACQ antes de la separación del adaptador.',
+    antSel: 'Ponlo en RNTY antes de la separación del adaptador.',
+  },
+  presets: {
+    prelaunch: "Ajustes previos al lanzamiento",
+    afterInsertion: "Después de la inserción",
+    tr256: "En Tr-256",
+    afterRetroFire: "Después del disparo retro y la separación",
+    landing: "Squibs de aterrizaje",
+    insertion: 'Poner las posiciones de inserción',
+    useHf: 'Seleccionar HF',
+    beforeSeparation: 'Poner antes de la separación del adaptador',
+  },
+  status: {
+      "nasa": "Documentado en la NASA Vol II (nave real, GT-5 a GT-12).",
+      "partial": "Documentado en parte: lee los detalles abajo.",
+      "vol1": "Descrito solo en la NASA Vol 1, otra nave (GT-3, 4, 7): puede no aplicarse al Gemini de Reentry.",
+      "inferred": "Inferido, no declarado: los manuales no lo dicen directamente.",
+      "unverified": "No se encontró descripción en los manuales de la NASA que revisamos."
+  },
+  left: {
+    fn: {
+      coaxCntl: "En ON, deja funcionar el interruptor ANT SEL del panel de comunicaciones. ANT SEL maneja el conmutador coaxial 1 y la energía del desfasador de la antena de banda C.",
+      audio1: "Energía de reserva para la radio de voz UHF número 1. Debe estar en ON para que esa radio funcione y para grabar voz en cinta.",
+      audio2: "Energía de reserva para la radio de voz UHF número 2. Debe estar en ON para que esa radio funcione y para grabar voz en cinta.",
+      uhfRelay: "La descripción del keying dice que la energía del interruptor KEYING (VOX, PTT o CONT INT/PTT) pasa por la posición ON de este disyuntor. El texto del escaneo está dañado, así que lo identificamos por su etiqueta.",
+      toneVox: "Debe estar en ON, junto con AUDIO & UHF T/R 1 y 2, para grabar voz en cinta con RECORD en CONT o MOM.",
+      hfTr: "Energía de reserva para la radio HF. Está en ON antes del lanzamiento.",
+      antCntl: "En ON, conecta el cuadriplexor al conmutador coaxial 5, así que la antena corta UHF queda disponible.",
+      electTimer: "CB8-15: Alimenta el temporizador electrónico, que arranca en el despegue y cuenta el tiempo que falta para el retrocohete (disparo de los retrocohetes).",
+      eventTimer: "CB8-14: Alimenta el temporizador de eventos, que arranca en el despegue y cuenta el tiempo desde el despegue.",
+      boostCutoff1: "CB3-8: Alimenta el interruptor de apagado del propulsor y el de paso a guiado secundario. Arma ambos circuitos.",
+      boostCutoff2: "CB3-21: Respaldo de BOOST CUTOFF 1: también alimenta el interruptor de apagado del propulsor y la señal de corte del motor de la segunda etapa hacia el computador.",
+      retroAuto: "CB4-1: Alimenta el interruptor ARM AUTO RETRO y el disparo en salva de los retrocohetes en un aborto. Si no está cerrado, el temporizador no disparará los retrocohetes automáticamente.",
+      retroMan: "CB4-2: Alimenta el disparo manual de los retrocohetes y el disparo en salva con la palanca de aborto.",
+      tr256: "CB8-16: Deja que la señal TR-256 encienda tres indicadores ámbar del panel principal: IND RETRO ATT, BTRY PWR y RCS.",
+      ecsIndLts: "Ningún texto lo describe. Un diagrama muestra un circuito “ECS IND LTS” que alimenta las líneas de los interruptores de las bombas. Nuestra suposición: la energía de las cuatro luces indicadoras de las bombas.",
+      paraCntl: "No se describe para esta nave. En el Vol 1 (GT-3, 4, 7) alimenta los indicadores de 40K y 10.6K pies, y debe estar cerrado o los interruptores barostáticos no pueden encenderlos.",
+      seqLightsPwr: "CB6-1: Alimenta el interruptor BRIGHT-DIM de las luces de secuencia.",
+      seqLightsCntl: "CB1-13: Deja que el indicador BTRY PWR del panel principal se encienda en verde cuando se activa el relé de energía de las baterías principales.",
+      attIndRetro: "CB12-7: Alimenta el interruptor-indicador IND RETRO ATT y el relé de sesgo de retrocohete, que se activa al pulsar JETT RETRO.",
+      attIndLdg: "Suplemento del Vol II: aporta la señal de pérdida de seguimiento (escáner de horizonte). El Vol 1 (GT-3, 4, 7) dice otra cosa: alimenta el interruptor de modo de control de actitud. Las dos versiones difieren (naves distintas); para GT-5 en adelante vale el suplemento.",
+      boostInsCntl1: "CB3-1: Alimenta el bus de squib que usan la palanca de aborto y los pasos de separación del vehículo de lanzamiento: soltar la cofia y la tapa del escáner, separar la nave, extender antenas.",
+      boostInsCntl2: "CB3-11: Respaldo redundante de BOOST INSERT CNTL 1: la misma energía de squib por un segundo bus.",
+      retroSeqCntl1: "CB4-3: Alimenta el bus de squib de la secuencia de retrocohetes: los interruptores-indicadores SEP OAMS LINES, SEP ADAPT, SEP ELEC y JETT RETRO.",
+      retroSeqCntl2: "CB4-28: Respaldo redundante de RETRO SEQ CNTL 1: la misma energía de squib por un segundo bus.",
+      landSeqCntl1: "No se describe para esta nave. En el Vol 1 (GT-3, 4, 7) alimenta los interruptores EMERG DROGUE, HI ALT DROGUE, PARA, PARA JETT y LDG ATT.",
+      landSeqCntl2: "No se describe para esta nave. En el Vol 1 (GT-3, 4, 7) es el respaldo redundante de LANDING SEQ CNTL 1.",
+      seqLightsTest: "AMBER enciende todas las luces de secuencia ámbar (y todas las del panel anunciador). RED & GREEN enciende todas las rojas o verdes. La posición OFF del centro es solo del Vol 1 (otra nave).",
+      seqLightsBright: "BRIGHT o DIM para todas las luces de secuencia.",
+      boostInsertArm: "Arma los buses de squib de BOOST-INSERT. ARM antes del lanzamiento; SAFE tras la separación del propulsor y la inserción.",
+      retroPwrArm: "Arma los buses de squib de retrocohetes, que alimentan los interruptores de los retrocohetes y los disyuntores de la secuencia retro. ARM en Tr-256; SAFE tras el retro y la separación del adaptador.",
+      retroJettArm: "Arma el desprendimiento de la sección de retrocohetes. Se pone en ARM después del disparo de los retrocohetes: “efectivamente un enclavamiento para evitar el desprendimiento accidental de la sección de retrocohetes antes de dispararlos” (traducción nuestra).",
+      landingArm: "Arma los buses de squib de aterrizaje. ARM durante la reentrada, tras desarmar los buses de squib de retrocohetes; SAFE tras el aterrizaje. Vol 1 (GT-3, 4, 7): en SAFE no se pueden desplegar ni soltar los paracaídas. También está en SAFE en la inserción, para que la antena látigo HF se extienda.",
+      retroSquib1: "Uno de cuatro interruptores que envían el voltaje que enciende los cuatro retrocohetes. En SAFE se quita ese voltaje. ARM antes del lanzamiento (capacidad de aborto) y de nuevo en Tr-256.",
+      retroSquib2: "Uno de cuatro interruptores que envían el voltaje que enciende los cuatro retrocohetes. En SAFE se quita ese voltaje. ARM antes del lanzamiento (capacidad de aborto) y de nuevo en Tr-256.",
+      retroSquib3: "Uno de cuatro interruptores que envían el voltaje que enciende los cuatro retrocohetes. En SAFE se quita ese voltaje. ARM antes del lanzamiento (capacidad de aborto) y de nuevo en Tr-256.",
+      retroSquib4: "Uno de cuatro interruptores que envían el voltaje que enciende los cuatro retrocohetes. En SAFE se quita ese voltaje. ARM antes del lanzamiento (capacidad de aborto) y de nuevo en Tr-256.",
+      whipHf: "Uno de los tres disyuntores WHIP ANTENNAS, puestos antes del lanzamiento para que las piezas de comunicación funcionen en el orden correcto. El texto no dice cuál hace qué.",
+      whipUhf: "Uno de los tres disyuntores WHIP ANTENNAS, puestos antes del lanzamiento para que las piezas de comunicación funcionen en el orden correcto. El texto no dice cuál hace qué.",
+      whipDiplex: "Uno de los tres disyuntores WHIP ANTENNAS, puestos antes del lanzamiento para que las piezas de comunicación funcionen en el orden correcto. El texto no dice cuál hace qué.",
+    },
+  },
+  orbit: {
+    "perigee": "Perigeo",
+    "apogee": "Apogeo",
+    "period": "Período",
+    "earth": "Tierra",
+    "nmi": "mn",
+    "stretched": "Alturas estiradas ×{k}",
+    "airLine": "El aire empieza: {km} km (nuestra línea)",
+    "cannon": {
+      "head": "Tres disparos, tres velocidades",
+      "slow": "Muy lento: cae cerca",
+      "fast": "Más rápido: cae más lejos",
+      "orbit": "Lo bastante rápido: sigue sin dar en la Tierra",
+      "label": "Animación: tres balas de cañón disparadas de lado desde una montaña alta. Las dos más lentas caen al suelo. La más rápida da la vuelta a la Tierra.",
+      "notToScale": "Sin escala"
+    },
+    "missions": {
+      "ma6": "Mercury MA-6",
+      "ma7": "Mercury MA-7",
+      "g4": "Gemini IV",
+      "g6a": "Gemini VI-A"
+    },
+    "apsides": {
+      "head": "Elige una órbita real",
+      "pick": "Órbitas reales",
+      "point": "Punto",
+      "colAlt": "Altitud (km)",
+      "colCenter": "Desde el centro de la Tierra (km)",
+      "colSpeed": "Velocidad (km/s)",
+      "calc": "Nuestro cálculo a partir de la órbita publicada (órbita ideal)",
+      "period": "Período: {min} min (nuestro cálculo).",
+      "radius": "Radio de la Tierra usado: {r} km.",
+      "printed": "Publicado por la NASA: {lo} × {hi} {unit} (perigeo × apogeo).",
+      "label": "Dibujo de la órbita de {name}, con el perigeo y el apogeo marcados.",
+      "yellow": "Amarillo: altitud"
+    },
+    "sim": {
+      "head": "Simulador de encendidos: elige un punto y empuja",
+      "whereLabel": "Dónde encender",
+      "atLow": "en el punto bajo (perigeo)",
+      "atHigh": "en el punto alto (apogeo)",
+      "atDeg": "a {deg}° del punto bajo",
+      "goLow": "Punto bajo",
+      "goHigh": "Punto alto",
+      "dirLabel": "En qué sentido",
+      "prograde": "Acelerar (progrado)",
+      "retrograde": "Frenar (retrógrado)",
+      "dvLabel": "Tamaño del empuje (delta-v)",
+      "presets": "Encendidos reales",
+      "reset": "Reiniciar",
+      "startOrbit": "Órbita inicial: {peri} × {apo} km (Mercury MA-7, NASA).",
+      "before": "Antes",
+      "after": "Después",
+      "opposite": "Altitud del lado opuesto",
+      "oppositeSide": "Lado opuesto",
+      "calc": "Nuestro cálculo",
+      "ideal": "Órbita ideal, encendido instantáneo, nuestro cálculo con las fórmulas de la NASA. No es una predicción de vuelo.",
+      "label": "Dibujo: la órbita antigua (punteada) y la nueva después del encendido (naranja), con el punto del encendido y el lado opuesto marcados.",
+      "noBurn": "Sin empuje, sin cambio.",
+      "escape": "Demasiada velocidad: ya no es una órbita alrededor de la Tierra.",
+      "result": "{action}: {dv} m/s, {where}. Altitud en el lado opuesto: de {from} km a {to} km.",
+      "actUp": "Acelerando",
+      "actDown": "Frenando",
+      "inAir": "El punto bajo está a {alt} km: dentro del aire (nuestra línea: {line} km), así que esta trayectoria termina en reentrada."
+    },
+    "presets": {
+      "gemVIA": {
+        "name": "Gemini VI-A: +4 m/s",
+        "note": "Gemini VI-A, 15 de diciembre de 1965: desde una órbita de 161 × 259 km, +4 m/s en el punto bajo. NASA: el perigeo no cambió y el apogeo subió a 272 km. Nuestro modelo: 272,7 km."
+      },
+      "gemXup": {
+        "name": "Gemini X: +856 ft/s",
+        "note": "Gemini X, motor del Agena: +856 ft/s (261 m/s) hacia delante, desde unas 206,9 × 208,9 mn. NASA: 208,6 × 750,5 mn. Nuestro modelo: unas 207 × 751 mn. Suponemos que fue en el punto bajo: la NASA no indica el punto exacto."
+      },
+      "gemXdown": {
+        "name": "Gemini X: −886 ft/s",
+        "note": "Gemini X, motor del Agena: 886 ft/s (270 m/s) hacia atrás, «para bajar el apogeo», desde 208,6 × 750,5 mn. NASA: 190,2 × 208,7 mn. Nuestro modelo: unas 190,7 × 208,6 mn. Punto del encendido supuesto en el punto bajo."
+      }
+    },
+    "retro": {
+      "chip0": "En órbita",
+      "chip1": "Encendido de retro",
+      "chip2": "Punto bajo en el aire",
+      "cap0": "Nuestro ejemplo: la órbita del MA-7",
+      "cap1": "Frenar {dv} m/s en el punto alto",
+      "cap2": "El punto bajo baja a {peri} km",
+      "label0": "Dibujo: una nave en el punto alto de su órbita.",
+      "label1": "Dibujo: la nave enciende sus cohetes contra su sentido de avance en el punto alto.",
+      "label2": "Dibujo: la nueva órbita se hunde en el anillo punteado de aire en su punto bajo.",
+      "lowPoint": "Punto bajo",
+      "computed": "Nuestro cálculo: en este ejemplo ideal, {dv} m/s en el punto alto dan el punto bajo que tuvo el Gemini IV tras su encendido de retro (42,3 mn, 78 km). No es un número de la misión."
+    },
+    "catch": {
+      "gap": "Distancia: {deg}°",
+      "periods": "Vuelta: {lo} min frente a {hi} min",
+      "low": "Órbita baja ({km} km)",
+      "high": "Órbita alta ({km} km)",
+      "speeded": "tiempo acelerado",
+      "label": "Animación: dos naves en dos órbitas circulares. La de la órbita baja va más rápido y alcanza a la otra.",
+      "note": "Nuestras órbitas de ejemplo y tiempos de vuelta, calculados con la tercera ley de Kepler."
+    }
+  },
+  slides: {
+    orbitWhat: {
+      "title": "Una órbita es una caída que no llega al suelo",
+      "body": "Lanza algo de lado y cae. Lánzalo lo bastante rápido y la Tierra se curva al caer: eso es una órbita.",
+      "note": "La imagen de la NASA es el cañón de Newton: con suficiente velocidad, la bala «cae por completo alrededor de la Tierra». En órbita baja son unos 7,8 km/s, y una vuelta dura unos 90 minutos (ESA).",
+      "example": "Los astronautas flotan porque caen a la misma velocidad que su nave, no porque la gravedad haya desaparecido (NASA)."
+    },
+    orbitShape: {
+      "title": "Apogeo y perigeo",
+      "body": "Una órbita suele ser un óvalo, no un círculo. El punto más cercano a la Tierra es el perigeo, el más lejano es el apogeo.",
+      "bullets": [
+        "La altitud es la altura sobre el suelo.",
+        "Los cálculos de órbita usan la distancia al centro de la Tierra: altitud más radio de la Tierra.",
+        "Vas más rápido en el punto más cercano (las velocidades de aquí son nuestro cálculo)."
+      ],
+      "note": "Los documentos de las misiones dan la altitud sobre la Tierra. Aurora 7 (MA-7, 1962) voló 86,87 × 144,06 millas náuticas (NASA)."
+    },
+    orbitBurn: {
+      "title": "Enciende aquí, cambia allá",
+      "body": "Acelera o frena en un punto y se mueve el lado opuesto de la órbita.",
+      "bullets": [
+        "Acelerar en el punto bajo: el punto alto sube.",
+        "Frenar en el punto alto: el punto bajo baja."
+      ],
+      "note": "La NASA dice lo mismo. El Gemini VI-A aceleró solo 4 m/s y su apogeo subió de 259 a 272 km.",
+      "aside": {
+        "title": "Pruébalo",
+        "body": "Pulsa un encendido real y luego aleja el punto del punto bajo o del alto: los dos lados empiezan a moverse. El gran encendido de retro del Gemini X también bajó los dos lados."
+      },
+      "insight": "Nuestra redacción: el «vector velocidad» es tu rapidez más la dirección en que vas. Progrado es un empuje a favor, retrógrado un empuje en contra. Los documentos Gemini X de la NASA dicen «posigrade» y «retrograde»."
+    },
+    orbitRetro: {
+      "title": "Retrofuego: hundir el punto bajo",
+      "body": "Para volver a casa, frena con cohetes que apuntan hacia delante. El punto bajo se hunde en el aire, y el aire hace el resto.",
+      "bullets": [
+        "El Mercury tenía tres retrocohetes; con dos bastaba para una reentrada segura (NASA).",
+        "El encendido de retro del Gemini IV dejó un punto bajo de 42,3 mn (78 km). NASA: para seguir en órbita, no bajes de unos 150 km."
+      ],
+      "note": "El Mercury reentraba solo con «frenado por arrastre». En el MA-7 el retrofuego se encendió unos 3 segundos tarde y aterrizó a varios cientos de millas de lo previsto.",
+      "insight": "Nuestra simplificación: dibujamos el comienzo del aire a 120 km. La NASA no dio un número único en lo que leímos; el Gemini IV planeó empezar su reentrada a 400.000 ft (unos 122 km). El tamaño del encendido mostrado es nuestro cálculo."
+    },
+    orbitCatch: {
+      "title": "Para alcanzar, baja",
+      "body": "Una órbita más baja es una vuelta más corta. Baja para ganar terreno al objetivo y luego sube a su encuentro.",
+      "note": "NASA: ganar velocidad sube la órbita y alarga la vuelta. La técnica correcta es «bajar a una órbita más baja y por tanto más corta».",
+      "example": "El Gemini VI-A voló más bajo que el Gemini VII, así que iba más rápido y le fue ganando poco a poco (NASA).",
+      "aside": {
+        "title": "El Gemini IV falló",
+        "body": "En junio de 1965 la tripulación apuntó a la etapa del cohete ya gastada y aceleró. No pudieron acercarse y gastaron casi la mitad del propelente."
+      }
+    },
+    commPanel: {
+      title: 'El panel de comunicaciones',
+      body: 'En el juego Gemini, las radios se controlan desde el panel central inferior.',
+      note: 'Leímos las etiquetas impresas a ojo en la imagen del manual, así que puede haber errores. Donde el texto del manual no dice qué hace un control, la lectura lo indica.',
+      insight: 'Es un redibujo simplificado nuestro, no la imagen del manual. Las posiciones iniciales son arbitrarias.',
+    },
+    commOperate: {
+      title: 'Cómo mueve el juego un control',
+      body: 'El panel tiene interruptores (verticales u horizontales) y selectores giratorios.',
+      bullets: [
+        'Interruptor vertical: clic izquierdo sube, clic derecho baja.',
+        'Interruptor horizontal: clic izquierdo a la izquierda, clic derecho a la derecha.',
+        'Selector: clic derecho gira a la derecha, clic izquierdo a la izquierda.',
+      ],
+      insight: 'Aquí, un toque mueve el control a su siguiente posición; clic derecho o las flechas del teclado retroceden una. Es nuestra simplificación.',
+    },
+    commInsertion: {
+      title: 'En la inserción',
+      body: 'El manual da tres ajustes para la inserción.',
+      bullets: [
+        'HF ANT en EXT (un minuto para extenderse), luego OFF.',
+        'S-BAND y C-BAND en CMD.',
+      ],
+      insight: 'El botón solo pone los interruptores en las posiciones nombradas. El “luego OFF” viene después: hazlo a mano.',
+    },
+    commHf: {
+      title: 'HF y reentrada',
+      body: 'UHF es la radio principal en órbita. HF hace falta después de la reentrada.',
+      bullets: [
+        'Para usar HF: HF select en RNTY y MODE 1 o 2 en HF.',
+        'Antes de la separación del adaptador: T/M CONTROL en R/T & ACQ y ANT SEL en RNTY.',
+        'Antes se retrae la antena HF; puede tardar más de un minuto.',
+      ],
+      insight: 'Entendimos “HF select” como el interruptor HF y “T/M CONTROL” como el interruptor T/M. El texto del manual no los señala en la imagen.',
+    },
+    leftPanel: {
+      title: "El panel izquierdo de interruptores y disyuntores",
+      body: "El nombre que da la NASA al panel del extremo izquierdo de la cabina Gemini. Tiene 42 controles en cuatro filas.",
+      bullets: [
+        "Fila 1, 11 disyuntores: sobre todo comunicaciones.",
+        "Fila 2, 12 disyuntores: temporizadores, corte del propulsor, retro y luces de secuencia.",
+        "Fila 3, 11 celdas: más disyuntores y tres interruptores.",
+        "Fila 4, 8 interruptores: arman y aseguran los squibs.",
+      ],
+      note: "NASA: “tres filas de disyuntores y una fila de interruptores” (traducción nuestra). El dibujo dice “S/C 8 & UP”. Las páginas de los chips son páginas del PDF; también se incluyen las páginas impresas del manual.",
+      insight: "Es nuestro redibujo plano, no la imagen en ángulo de la NASA. Ubicar los tres interruptores de la fila 3 (SEQ LIGHTS TEST, BRIGHT / DIM, ATT IND) es nuestra lectura del dibujo. Los disyuntores empiezan abiertos (abajo) de forma arbitraria. Toca un control para ver qué tan documentado está.",
+    },
+    leftTypes: {
+      title: "Disyuntores e interruptores de squib",
+      body: "La fila de abajo arma o asegura los buses de squib: ARM arriba, SAFE abajo. Los disyuntores dejan pasar la energía cuando están cerrados (arriba).",
+      bullets: [
+        "31 disyuntores: cerrado = arriba.",
+        "8 interruptores ARM / SAFE en la fila de abajo.",
+        "Los cuatro RETRO ROCKET SQUIBS envían el voltaje que enciende los retrocohetes. En SAFE se quita.",
+      ],
+      note: "La NASA dice que la fila de abajo tiene ocho interruptores, pero su texto de secuencia describe siete: LANDING se describe en otro lugar.",
+      insight: "En el dibujo de la NASA, disyuntores e interruptores se parecen. CLOSED / OPEN es nuestra palabra, no una etiqueta impresa.",
+    },
+    leftSquib: {
+      title: "La secuencia de los interruptores de squib",
+      body: "Pulsa un botón para fijar una etapa documentada y luego cambia un interruptor a mano.",
+      bullets: [
+        "Antes del lanzamiento: BOOST-INSERT y los cuatro squibs en ARM; RETRO y LANDING en SAFE.",
+        "Tras la inserción: BOOST-INSERT en SAFE.",
+        "En Tr-256: RETRO PWR y los cuatro squibs en ARM.",
+        "Tras disparar los retrocohetes: RETRO JETT en ARM. Tras la separación: RETRO PWR en SAFE.",
+        "Durante la reentrada: LANDING en ARM.",
+      ],
+      note: "RETRO JETT es “efectivamente un enclavamiento para evitar el desprendimiento accidental de la sección de retrocohetes antes de dispararlos” (traducción nuestra). El manual del juego también pone los cuatro squibs en SAFE tras la inserción; no lo encontramos en las páginas de la NASA.",
+      insight: "Los botones son nuestro orden de ajustes documentados por separado, no una lista oficial. “Tras la inserción” mezcla un paso de la NASA con uno del manual del juego. El botón de prelanzamiento también cierra los disyuntores de las filas 1 a 3, pero no toca los interruptores de la fila 3.",
+    },
+    leftGaps: {
+      title: "Lo que aún no está documentado",
+      body: "Algunas celdas no tienen función documentada, o solo una de otra nave. Están resaltadas.",
+      bullets: [
+        "Sin descripción: TV, IND LT TEST, ATT IND WITH FDI / W/O FDI.",
+        "Solo inferido: UHF RELAY, ECS IND LTS.",
+        "Solo en el Vol 1 (otra nave): PARA CNTL, LANDING SEQ CNTL 1 y 2.",
+        "Parcial: los tres WHIP ANTENNAS, ATT IND CNTL LDG, SEQ LIGHTS TEST, LANDING.",
+        "Una pequeña etiqueta “CLK LT” sobre la fila 1 no se explica.",
+      ],
+      note: "El Vol 1 y el Vol II usan números de disyuntor distintos: el temporizador electrónico es CB8-15 en el Vol II y CB8-43 en el Vol 1.",
+      insight: "“No documentado” significa que no lo hemos encontrado, no que no haga nada: los escaneos tienen ruido y pudimos pasar por alto una mención. Toca una celda resaltada para ver su estado.",
+    },
+  },
+};

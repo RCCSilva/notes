@@ -1,0 +1,334 @@
+// Content for the Reentry topic. Every fact here comes from research/reentry/*.md. Printed panel labels stay as printed.
+export default {
+  name: 'Reentry panels (proof of concept)',
+  blurb: "PROOF OF CONCEPT: interactive redraws of the cockpit panels of the Reentry spaceflight simulator, built from its flight manuals and NASA’s Gemini manual. So far two panels: the Gemini communication panel and the Gemini left switch and circuit breaker panel. A basic lesson also explains orbits, with a burn simulator.",
+  lessons: {
+    orbits: {"title": "Orbits for beginners", "summary": "Proof of concept: falling around the Earth, apogee and perigee, and a burn simulator."},
+    mercury: { title: "Mercury: the capsule and its panels", summary: "Planned: the Mercury capsule and its cockpit panels." },
+    geminiComm: { title: 'Gemini: communication panel', summary: 'Proof of concept: an interactive panel. Tap the switches and see what the manual says.' },
+    geminiLeft: { title: "Gemini: left switch and circuit breaker panel", summary: "Proof of concept: 42 breakers and squib switches. Tap them, see what NASA documents and what is still unverified." },
+    apollo: { title: "Apollo: the command module", summary: "Planned: the Apollo command module and its cockpit panels." },
+    orbitMath: { title: "Orbit math: the formulas behind the simulator", summary: "Planned: the formulas behind the orbit simulator, explained step by step." },
+  },
+  panel: {
+    names: { 'gemini-comm': 'Gemini communication panel (our redraw)' , 'gemini-left': "Gemini left switch and circuit breaker panel (our redraw)" },
+    hint: 'Tap a control to move it. Right-click or the arrow keys go back.',
+    pickOne: 'Tap a control to see its position and what the manual says about it.',
+    position: 'Position',
+    inGame: 'In the game',
+    unverified: 'Function not yet verified: the manual text we read does not say what it does.',
+  },
+  rule: {
+    switchV: 'Vertical switch: left click pushes it up, right click pushes it down.',
+    switchH: 'Horizontal switch: left click moves it left, right click moves it right.',
+    selector: 'Selector: right click turns it rightwards (counterclockwise), left click leftwards (clockwise).',
+  },
+  fn: {
+    mode1: 'Picks the radio. Set it to HF (with HF select at RNTY) to use HF. UHF is the main radio in orbit; HF is needed after re-entry.',
+    mode2: 'Picks the radio. Set it to HF (with HF select at RNTY) to use HF. UHF is the main radio in orbit; HF is needed after re-entry.',
+    hfSel: 'Put it at RNTY to select the HF radio.',
+    hfAnt: 'Extends or retracts the HF antenna. At insertion set EXT: the HF antenna extends in one minute. Then set OFF. It is retracted before adapter separation, which can take over a minute.',
+    sBand: 'Set to CMD at insertion.',
+    cBand: 'Set to CMD at insertion.',
+    tm: 'Set to R/T & ACQ before adapter separation.',
+    antSel: 'Set to RNTY before adapter separation.',
+  },
+  presets: {
+    prelaunch: "Pre-launch settings",
+    afterInsertion: "After insertion",
+    tr256: "At Tr-256",
+    afterRetroFire: "After retro fire and separation",
+    landing: "Landing squibs",
+    insertion: 'Set the insertion positions',
+    useHf: 'Select HF',
+    beforeSeparation: 'Set before adapter separation',
+  },
+  status: {
+      "nasa": "Documented in NASA Vol II (real spacecraft, GT-5 to GT-12).",
+      "partial": "Partly documented: read the details below.",
+      "vol1": "Described only in NASA Vol 1, a different spacecraft (GT-3, 4, 7): it may not apply to the Reentry Gemini.",
+      "inferred": "Inferred, not stated: the manuals do not say this directly.",
+      "unverified": "No description found in the NASA manuals we searched."
+  },
+  left: {
+    fn: {
+      coaxCntl: "When ON, it lets the ANT SEL switch on the communications panel work. ANT SEL sets coaxial switch 1 and the phase-shifter power for the C-band antenna.",
+      audio1: "Stand-by power for the number 1 UHF voice radio. It must be ON for that radio to work, and for voice tape recording.",
+      audio2: "Stand-by power for the number 2 UHF voice radio. It must be ON for that radio to work, and for voice tape recording.",
+      uhfRelay: "The keying description says power for the KEYING switch (VOX, PTT or CONT INT/PTT) goes through the ON position of this breaker. The scan text is garbled, so we matched it by its label.",
+      toneVox: "Must be ON, together with AUDIO & UHF T/R 1 and 2, to record voice on tape with RECORD at CONT or MOM.",
+      hfTr: "Stand-by power for the HF radio. It is ON before launch.",
+      antCntl: "When ON, it connects the quadriplexer to coaxial switch 5, so the UHF stub antenna is available.",
+      electTimer: "CB8-15: Powers the electronic timer, which starts at lift-off and counts the time to go until retrograde (retro rocket fire).",
+      eventTimer: "CB8-14: Powers the event timer, which starts at lift-off and counts the time since lift-off.",
+      boostCutoff1: "CB3-8: Powers the booster shutdown switch and the switch to secondary guidance. It arms both circuits.",
+      boostCutoff2: "CB3-21: Backup for BOOST CUTOFF 1: it also powers the booster shutdown switch, and the second stage engine cutoff signal to the computer.",
+      retroAuto: "CB4-1: Powers the ARM AUTO RETRO switch and the salvo fire of the retrorockets in an abort. If it is not closed, the timer will not fire the retrorockets automatically.",
+      retroMan: "CB4-2: Powers the manual firing of the retrorockets, and the salvo firing with the abort handle.",
+      tr256: "CB8-16: Lets the TR-256 signal light three amber indicators on the main panel: IND RETRO ATT, BTRY PWR and RCS.",
+      ecsIndLts: "No text describes it. A diagram shows an “ECS IND LTS” circuit feeding the pump switch lines. Our guess: power for the four pump indicator lights.",
+      paraCntl: "Not described for this spacecraft. In Vol 1 (GT-3, 4, 7) it powers the 40K and 10.6K feet indicators, and it must be closed or the barostat switches cannot light them.",
+      seqLightsPwr: "CB6-1: Powers the sequence light BRIGHT-DIM switch.",
+      seqLightsCntl: "CB1-13: Lets the BTRY PWR indicator on the main panel light green when the main battery power relay is energized.",
+      attIndRetro: "CB12-7: Powers the IND RETRO ATT switch-indicator, and the retrograde bias relay that is energized when JETT RETRO is pressed.",
+      attIndLdg: "Vol II supplement: it supplies the loss-of-track (horizon scanner) signal. Vol 1 (GT-3, 4, 7) says something else: it powers the attitude control mode switch. The two differ (different spacecraft); for GT-5 and up the supplement applies.",
+      boostInsCntl1: "CB3-1: Powers the squib bus used by the abort handle and by the launch-vehicle separation steps: nose fairing and scanner cover jettison, spacecraft separation, antenna extension.",
+      boostInsCntl2: "CB3-11: Redundant backup of BOOST INSERT CNTL 1: the same squib power over a second bus.",
+      retroSeqCntl1: "CB4-3: Powers the squib bus for the retrograde sequence: the SEP OAMS LINES, SEP ADAPT, SEP ELEC and JETT RETRO switch-indicators.",
+      retroSeqCntl2: "CB4-28: Redundant backup of RETRO SEQ CNTL 1: the same squib power over a second bus.",
+      landSeqCntl1: "Not described for this spacecraft. In Vol 1 (GT-3, 4, 7) it powers the EMERG DROGUE, HI ALT DROGUE, PARA, PARA JETT and LDG ATT switches.",
+      landSeqCntl2: "Not described for this spacecraft. In Vol 1 (GT-3, 4, 7) it is the redundant backup of LANDING SEQ CNTL 1.",
+      seqLightsTest: "AMBER lights all the amber sequence lights (and all lights on the annunciator panel). RED & GREEN lights all the red or green ones. The OFF position in the middle is from Vol 1 only (a different spacecraft).",
+      seqLightsBright: "BRIGHT or DIM for all the sequence lights.",
+      boostInsertArm: "Arms the booster-insert squib buses. ARM before launch; SAFE after booster separation and insertion.",
+      retroPwrArm: "Arms the retrograde squib buses, which feed the retro rocket switches and the retro sequence breakers. ARM at Tr-256; SAFE after retro and adapter separation.",
+      retroJettArm: "Arms the retrograde-section jettison. It is ARMed after the retro rockets fire: “effectively an interlock to prevent inadvertent jettisoning of the retrograde section prior to firing of the retrograde rockets”.",
+      landingArm: "Arms the landing squib buses. ARM during re-entry, after the retrograde squib buses are safed; SAFE after landing. Vol 1 (GT-3, 4, 7): in SAFE, the chutes cannot be deployed or jettisoned. It is also SAFE at insertion, so the HF whip antenna can extend.",
+      retroSquib1: "One of four switches that send the voltage to ignite the four retrofire rockets. In SAFE the voltage is removed. ARM before launch (abort capability) and again at Tr-256.",
+      retroSquib2: "One of four switches that send the voltage to ignite the four retrofire rockets. In SAFE the voltage is removed. ARM before launch (abort capability) and again at Tr-256.",
+      retroSquib3: "One of four switches that send the voltage to ignite the four retrofire rockets. In SAFE the voltage is removed. ARM before launch (abort capability) and again at Tr-256.",
+      retroSquib4: "One of four switches that send the voltage to ignite the four retrofire rockets. In SAFE the voltage is removed. ARM before launch (abort capability) and again at Tr-256.",
+      whipHf: "One of three WHIP ANTENNAS breakers, set before launch so the communication parts work in the right order. The text does not say which breaker does what.",
+      whipUhf: "One of three WHIP ANTENNAS breakers, set before launch so the communication parts work in the right order. The text does not say which breaker does what.",
+      whipDiplex: "One of three WHIP ANTENNAS breakers, set before launch so the communication parts work in the right order. The text does not say which breaker does what.",
+    },
+  },
+  orbit: {
+    "perigee": "Perigee",
+    "apogee": "Apogee",
+    "period": "Period",
+    "earth": "Earth",
+    "nmi": "nmi",
+    "stretched": "Heights stretched ×{k}",
+    "airLine": "Air starts: {km} km (our line)",
+    "cannon": {
+      "head": "Three shots, three speeds",
+      "slow": "Too slow: it falls close",
+      "fast": "Faster: it lands farther",
+      "orbit": "Fast enough: it keeps missing the Earth",
+      "label": "Animation: three cannonballs fired sideways from a tall mountain. The two slower ones fall to the ground. The fastest circles the Earth.",
+      "notToScale": "Not to scale"
+    },
+    "missions": {
+      "ma6": "Mercury MA-6",
+      "ma7": "Mercury MA-7",
+      "g4": "Gemini IV",
+      "g6a": "Gemini VI-A"
+    },
+    "apsides": {
+      "head": "Pick a real orbit",
+      "pick": "Real orbits",
+      "point": "Point",
+      "colAlt": "Altitude (km)",
+      "colCenter": "From Earth’s center (km)",
+      "colSpeed": "Speed (km/s)",
+      "calc": "Our calculation from the printed orbit (ideal orbit)",
+      "period": "Period: {min} min (our calculation).",
+      "radius": "Earth radius used: {r} km.",
+      "printed": "NASA printed: {lo} × {hi} {unit} (perigee × apogee).",
+      "label": "Picture of the {name} orbit, with perigee and apogee marked.",
+      "yellow": "Yellow: altitude"
+    },
+    "sim": {
+      "head": "Burn simulator: pick a spot, then push",
+      "whereLabel": "Where to burn",
+      "atLow": "at the low point (perigee)",
+      "atHigh": "at the high point (apogee)",
+      "atDeg": "{deg}° around from the low point",
+      "goLow": "Low point",
+      "goHigh": "High point",
+      "dirLabel": "Which way",
+      "prograde": "Speed up (prograde)",
+      "retrograde": "Slow down (retrograde)",
+      "dvLabel": "Push size (delta-v)",
+      "presets": "Real burns",
+      "reset": "Reset",
+      "startOrbit": "Start orbit: {peri} × {apo} km (Mercury MA-7, NASA).",
+      "before": "Before",
+      "after": "After",
+      "opposite": "Opposite side altitude",
+      "oppositeSide": "Opposite side",
+      "calc": "Our calculation",
+      "ideal": "Ideal orbit, instant burn, our calculation with NASA’s formulas. Not a flight prediction.",
+      "label": "Picture: the old orbit (dashed) and the new orbit after the burn (orange), with the burn spot and the opposite side marked.",
+      "noBurn": "No push, no change.",
+      "escape": "Too much speed: this is no longer an orbit around the Earth.",
+      "result": "{action}: {dv} m/s, {where}. Altitude on the opposite side: {from} km to {to} km.",
+      "actUp": "Speeding up",
+      "actDown": "Slowing down",
+      "inAir": "The low point is {alt} km: inside the air (our line: {line} km), so this path ends in re-entry."
+    },
+    "presets": {
+      "gemVIA": {
+        "name": "Gemini VI-A: +4 m/s",
+        "note": "Gemini VI-A, 15 December 1965: from a 161 × 259 km orbit, +4 m/s at the low point. NASA: the perigee stayed, the apogee rose to 272 km. Our model: 272.7 km."
+      },
+      "gemXup": {
+        "name": "Gemini X: +856 ft/s",
+        "note": "Gemini X, Agena engine: +856 ft/s (261 m/s) forward, from about 206.9 × 208.9 nmi. NASA: 208.6 × 750.5 nmi. Our model: about 207 × 751 nmi. We assume the burn was at the low point: NASA’s exact spot is not listed."
+      },
+      "gemXdown": {
+        "name": "Gemini X: −886 ft/s",
+        "note": "Gemini X, Agena engine: 886 ft/s (270 m/s) backward, “to lower the apogee”, from 208.6 × 750.5 nmi. NASA: 190.2 × 208.7 nmi. Our model: about 190.7 × 208.6 nmi. Burn spot assumed at the low point."
+      }
+    },
+    "retro": {
+      "chip0": "In orbit",
+      "chip1": "Retro burn",
+      "chip2": "Low point in the air",
+      "cap0": "Our example: the MA-7 orbit",
+      "cap1": "Slow down {dv} m/s at the high point",
+      "cap2": "The low point sinks to {peri} km",
+      "label0": "Picture: a spacecraft at the high point of its orbit.",
+      "label1": "Picture: the spacecraft fires its rockets against its direction of travel at the high point.",
+      "label2": "Picture: the new orbit dips into the dashed ring of air at its low point.",
+      "lowPoint": "Low point",
+      "computed": "Our calculation: in this ideal example, {dv} m/s at the high point gives the low point Gemini IV had after its retro burn (42.3 nmi, 78 km). It is not a mission number."
+    },
+    "catch": {
+      "gap": "Gap: {deg}°",
+      "periods": "Lap: {lo} min vs {hi} min",
+      "low": "Lower orbit ({km} km)",
+      "high": "Higher orbit ({km} km)",
+      "speeded": "time sped up",
+      "label": "Animation: two spacecraft on two circular orbits. The one on the lower orbit moves faster and catches up with the other.",
+      "note": "Our example orbits and lap times, calculated with Kepler’s third law."
+    }
+  },
+  slides: {
+    orbitWhat: {
+      "title": "An orbit is a fall that keeps missing",
+      "body": "Throw something sideways and it falls. Throw it fast enough and the Earth curves away as it falls: that is an orbit.",
+      "note": "NASA’s picture is Newton’s cannon: fast enough, the ball “falls completely around Earth”. In low Earth orbit that is about 7.8 km/s, and a lap takes about 90 minutes (ESA).",
+      "example": "Astronauts float because they fall at the same rate as their craft, not because gravity is gone (NASA)."
+    },
+    orbitShape: {
+      "title": "Apogee and perigee",
+      "body": "An orbit is usually an oval, not a circle. The closest point to Earth is the perigee, the farthest is the apogee.",
+      "bullets": [
+        "Altitude is height above the ground.",
+        "Orbit math uses distance from Earth’s center: altitude plus Earth’s radius.",
+        "You move fastest at the closest point (speeds here are our calculation)."
+      ],
+      "note": "Mission papers quote altitude above the Earth. Aurora 7 (MA-7, 1962) flew 86.87 × 144.06 nautical miles (NASA)."
+    },
+    orbitBurn: {
+      "title": "Burn here, change there",
+      "body": "Speed up or slow down at one spot, and the opposite side of the orbit moves.",
+      "bullets": [
+        "Speed up at the low point: the high point rises.",
+        "Slow down at the high point: the low point drops."
+      ],
+      "note": "NASA says the same. Gemini VI-A sped up by just 4 m/s, and its apogee rose from 259 to 272 km.",
+      "aside": {
+        "title": "Try it",
+        "body": "Press a real burn, then slide the spot away from the low or high point: both sides start to move. Gemini X’s big retro burn lowered both sides too."
+      },
+      "insight": "Our wording: the “velocity vector” is your speed plus the direction you are heading. Prograde is a push along it, retrograde a push against it. NASA’s Gemini X papers say “posigrade” and “retrograde”."
+    },
+    orbitRetro: {
+      "title": "Retrofire: sink the low point",
+      "body": "To come home, slow down with rockets pointing forward. The low point sinks into the air, and the air does the rest.",
+      "bullets": [
+        "Mercury had three retrorockets; any two gave a safe re-entry (NASA).",
+        "Gemini IV’s retro burn gave a low point of 42.3 nmi (78 km). NASA: to stay in orbit, don’t go below about 150 km."
+      ],
+      "note": "Mercury re-entered by “drag braking only”. On MA-7 the retrofire was about 3 seconds late, and it landed several hundred miles from the plan.",
+      "insight": "Our simplification: we draw the start of the air at 120 km. NASA gave no single number in what we read; Gemini IV planned its re-entry to begin at 400,000 ft (about 122 km). The burn size shown is our own calculation."
+    },
+    orbitCatch: {
+      "title": "To catch up, go lower",
+      "body": "A lower orbit is a shorter lap. Drop down to gain on the target, then rise to meet it.",
+      "note": "NASA: adding speed raises the orbit and slows the lap. The proper technique is “dropping to a lower and thus shorter orbit”.",
+      "example": "Gemini VI-A flew lower than Gemini VII, so it was faster and slowly gained on it (NASA).",
+      "aside": {
+        "title": "Gemini IV missed",
+        "body": "In June 1965 the crew pointed at the spent rocket stage and thrusted. They could not close on it and used nearly half their propellant."
+      }
+    },
+    commPanel: {
+      title: 'The communication panel',
+      body: 'In the Gemini game, the radios are controlled from the lower center panel.',
+      note: 'We read the printed labels by eye from the manual’s picture, so a misread is possible. Where the manual text does not say what a control does, the readout says so.',
+      insight: 'This is our own simplified redraw, not the manual’s picture. Starting positions are arbitrary.',
+    },
+    commOperate: {
+      title: 'How the game moves a control',
+      body: 'The panel has switches (vertical or horizontal) and rotary selectors.',
+      bullets: [
+        'Vertical switch: left click up, right click down.',
+        'Horizontal switch: left click left, right click right.',
+        'Selector: right click turns it rightwards, left click leftwards.',
+      ],
+      insight: 'Here, a tap moves a control to its next position; right-click or the arrow keys go back one. That is our simplification.',
+    },
+    commInsertion: {
+      title: 'At insertion',
+      body: 'The manual gives three settings for insertion.',
+      bullets: [
+        'HF ANT to EXT (one minute to extend), then OFF.',
+        'S-BAND and C-BAND to CMD.',
+      ],
+      insight: 'The button only sets the switches to the named positions. The “then OFF” comes later: do it by hand.',
+    },
+    commHf: {
+      title: 'HF and re-entry',
+      body: 'UHF is the main radio in orbit. HF is needed after re-entry.',
+      bullets: [
+        'To use HF: HF select to RNTY, MODE switch 1 or 2 to HF.',
+        'Before adapter separation: T/M CONTROL to R/T & ACQ, ANT SEL to RNTY.',
+        'The HF antenna is retracted first; this can take over a minute.',
+      ],
+      insight: 'We took “HF select” to be the HF toggle and “T/M CONTROL” to be the T/M toggle. The manual text does not point at them on the picture.',
+    },
+    leftPanel: {
+      title: "The left switch and circuit breaker panel",
+      body: "NASA’s name for the panel at the far left of the Gemini cabin. It has 42 controls in four rows.",
+      bullets: [
+        "Row 1, 11 breakers: largely communications.",
+        "Row 2, 12 breakers: timers, booster cutoff, retro and sequence lights.",
+        "Row 3, 11 cells: more breakers, plus three switches.",
+        "Row 4, 8 switches: arm and safe the squibs.",
+      ],
+      note: "NASA: “three rows of circuit breakers and one row of switches”. The drawing is marked “S/C 8 & UP”. Chip page numbers are PDF pages; the manual’s printed numbers are in the chips too.",
+      insight: "This is our flat redraw, not NASA’s angled picture. Placing the three row 3 switches (SEQ LIGHTS TEST, BRIGHT / DIM, ATT IND) is our reading of the drawing. Breakers start open (down) arbitrarily. Tap a control to see how well it is documented.",
+    },
+    leftTypes: {
+      title: "Breakers and squib switches",
+      body: "A breaker passes power when closed (up). The bottom row switches arm or safe the squib buses: ARM up, SAFE down.",
+      bullets: [
+        "31 breakers: closed = up.",
+        "8 ARM / SAFE switches in the bottom row.",
+        "The four RETRO ROCKET SQUIBS switches send the voltage that ignites the retrorockets. In SAFE it is removed.",
+      ],
+      note: "NASA says the bottom row has eight switches but its sequence text describes seven: LANDING is described elsewhere.",
+      insight: "Breakers and switches look alike on NASA’s drawing. CLOSED / OPEN is our wording, not a printed label.",
+    },
+    leftSquib: {
+      title: "The squib switch sequence",
+      body: "Press a button to set a documented stage, then change a switch by hand.",
+      bullets: [
+        "Before launch: BOOST-INSERT and the four squibs ARM; RETRO and LANDING SAFE.",
+        "After insertion: BOOST-INSERT SAFE.",
+        "At Tr-256: RETRO PWR and the four squibs ARM.",
+        "After the retro rockets fire: RETRO JETT ARM. After separation: RETRO PWR SAFE.",
+        "During re-entry: LANDING ARM.",
+      ],
+      note: "RETRO JETT is “effectively an interlock to prevent inadvertent jettisoning of the retrograde section prior to firing of the retrograde rockets”. The game manual also sets the four squibs to SAFE after insertion; we did not find that in the NASA pages.",
+      insight: "The buttons are our ordering of separate documented settings, not an official checklist. “After insertion” mixes a NASA step with a game-manual step. The pre-launch button also closes the breakers in rows 1 to 3 but leaves the row 3 switches alone.",
+    },
+    leftGaps: {
+      title: "What is not documented yet",
+      body: "Some cells have no documented function, or only one from another spacecraft. They are highlighted.",
+      bullets: [
+        "No description: TV, IND LT TEST, ATT IND WITH FDI / W/O FDI.",
+        "Inferred only: UHF RELAY, ECS IND LTS.",
+        "Vol 1 only (a different spacecraft): PARA CNTL, LANDING SEQ CNTL 1 and 2.",
+        "Partly: the three WHIP ANTENNAS, ATT IND CNTL LDG, SEQ LIGHTS TEST, LANDING.",
+        "A small “CLK LT” label above row 1 is not explained.",
+      ],
+      note: "Vol 1 and Vol II use different breaker numbers: the electronic timer is CB8-15 in Vol II and CB8-43 in Vol 1.",
+      insight: "“Not documented” means we have not found it, not that it does nothing: the scans are noisy, so a mention could have been missed. Tap a highlighted cell to see its status.",
+    },
+  },
+};

@@ -1,0 +1,55 @@
+/* Orbit lesson visuals. The picture is always a dark sky, so it looks the same in light and dark mode. */
+.ob-svg { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; user-select: none; }
+.ob-sky { fill: #0d1626; }
+.ob-earth { fill: #2b6cb0; stroke: #7fb4ea; stroke-width: 0.8; }
+.ob-land { fill: #3f9a5b; opacity: 0.85; }
+.ob-air { fill: none; stroke: #ff9d5c; stroke-width: 0.7; stroke-dasharray: 2.5 2.5; }
+.ob-old { fill: none; stroke: #8da2c4; stroke-width: 1.1; stroke-dasharray: 4 3; }
+.ob-new { fill: none; stroke: #ffb347; stroke-width: 1.6; }
+.ob-orbit { fill: none; stroke: #9fd0ff; stroke-width: 1.4; }
+.ob-trail { fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.ob-label { fill: #eef2f9; font: 700 7.5px var(--font-display, sans-serif); paint-order: stroke; stroke: #0d1626; stroke-width: 2.2px; stroke-linejoin: round; }
+.ob-label-air { fill: #ffb27a; font-size: 6.5px; }
+.ob-label-soft { fill: #b7c3d8; font-weight: 600; }
+.ob-pin circle { fill: #0d1626; stroke: #fff; stroke-width: 1.4; }
+.ob-pin.is-hl circle { stroke: #ffd24a; stroke-width: 2; fill: #ffd24a33; }
+.ob-pin.is-old circle { stroke: #8da2c4; stroke-width: 1.2; }
+.ob-craft path { fill: #fff; stroke: #0d1626; stroke-width: 0.8; }
+.ob-craft.is-hot path { fill: #ffd24a; }
+.ob-line { stroke: #8da2c4; stroke-width: 0.8; stroke-dasharray: 1.5 2.5; }
+.ob-line-alt { stroke: #ffd24a; stroke-width: 2.2; stroke-linecap: round; }
+.ob-arrow { stroke: #ffd24a; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ob-ball { stroke: #0d1626; stroke-width: 0.8; }
+
+.ob-key { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 1rem; align-items: center; }
+.ob-key span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.ob-key i { width: 0.8rem; height: 0.8rem; border-radius: 50%; display: inline-block; flex: none; }
+
+.ob-panel { display: grid; gap: 0.7rem; padding: 0.7rem 1rem 0.2rem; }
+.ob-row { display: grid; gap: 0.3rem; }
+.ob-row > label, .ob-row > .ob-name { font-weight: 700; color: var(--text); font-size: 0.9rem; }
+.ob-row input[type='range'] { width: 100%; accent-color: var(--accent); min-height: 2rem; }
+.ob-seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ob-btn {
+  font: 600 0.88rem/1.2 var(--font-body);
+  padding: 0.5rem 0.8rem;
+  min-height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.ob-btn[aria-pressed='true'] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.ob-btn:hover { border-color: var(--accent); }
+.ob-val { font-variant-numeric: tabular-nums; font-weight: 800; }
+.ob-status { margin: 0; padding: 0.6rem 0.8rem; border-radius: 10px; background: var(--accent-soft); color: var(--text); font-weight: 600; font-size: 0.92rem; }
+.ob-status.is-air { background: var(--warn-bg); color: var(--warn-text); }
+.ob-preset-note { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+.ob-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; color: var(--text); }
+.ob-table caption { text-align: left; font-weight: 700; padding-bottom: 0.3rem; color: var(--muted); }
+.ob-table th, .ob-table td { text-align: left; padding: 0.3rem 0.4rem; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; vertical-align: top; }
+.ob-table thead th { border-top: 0; color: var(--muted); font-weight: 600; }
+.ob-table td.is-hl { background: color-mix(in srgb, #ffd24a 30%, transparent); font-weight: 700; }
+.ob-small { font-size: 0.8rem; color: var(--muted); margin: 0; }
